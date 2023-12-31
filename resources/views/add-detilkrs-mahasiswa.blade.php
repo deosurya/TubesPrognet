@@ -226,6 +226,7 @@
         const formData = new FormData(event.target);
 
         formData.append('mahasiswa_id', mhsId);
+        formData.append('krs_id', krsId);
         // Accessing the value of 'nilai' from formData
         const nilai = formData.get('nilai');
         if (nilai < 0 || nilai > 100) {
