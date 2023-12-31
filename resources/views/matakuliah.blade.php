@@ -136,10 +136,14 @@
         })
         .then(function(response) {
             // Handle successful response
-            var mahasiswa = response.data;
+            var matakuliah = response.data;
             var tableBody = document.querySelector('tbody');
 
-            mahasiswa.forEach(function(matkul, index) {
+            matakuliah.sort(function(a, b) {
+                return a.semester.localeCompare(b.semester);
+            });
+
+            matakuliah.forEach(function(matkul, index) {
                 var row = document.createElement('tr');
                 var iterationCell = document.createElement('td');
                 var kodeCell = document.createElement('td');

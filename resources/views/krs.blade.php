@@ -135,10 +135,29 @@
         })
         .then(function(response) {
             // Handle successful response
-            var mahasiswa = response.data;
+            var krs = response.data;
             var tableBody = document.querySelector('tbody');
 
-            mahasiswa.forEach(function(krs, index) {
+            krs.sort(function(a, b) {
+                // Sort by tahun
+                var tahunComparison = a.tahun.localeCompare(b.tahun);
+                if (tahunComparison !== 0) {
+                    return tahunComparison;
+                }
+
+                // Sort by semester
+                var semesterA = a.semester.toLowerCase();
+                var semesterB = b.semester.toLowerCase();
+                if (semesterA === 'ganjil' && semesterB === 'genap') {
+                    return -1;
+                } else if (semesterA === 'genap' && semesterB === 'ganjil') {
+                    return 1;
+                } else {
+                    return semesterA.localeCompare(semesterB);
+                }
+            });
+
+            krs.forEach(function(krs, index) {
                 var row = document.createElement('tr');
                 var iterationCell = document.createElement('td');
                 var tahunCell = document.createElement('td');

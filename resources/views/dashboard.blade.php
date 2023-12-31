@@ -139,6 +139,10 @@
             var mahasiswa = response.data;
             var tableBody = document.querySelector('tbody');
 
+            mahasiswa.sort(function(a, b) {
+                return a.nim.localeCompare(b.nim);
+            });
+
             mahasiswa.forEach(function(mhs, index) {
                 var row = document.createElement('tr');
                 var iterationCell = document.createElement('td');
