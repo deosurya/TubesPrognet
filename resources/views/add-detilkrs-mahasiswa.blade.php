@@ -123,19 +123,6 @@
                                 </td>
                             </tr>
 
-                            <!-- <tr>
-                                <td colspan="2" class="text-center">
-                                    <div class="tombol-group">
-                                        <a id="back" class="tambah-data">
-                                            <i class="fas fa-arrow-left"></i> Kembali
-                                        </a>
-                                        <button type="submit" class="tambah-data" id="tambahDataButton">
-                                            <i class="fas fa-edit"></i> Simpan Perubahan
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
-
                         </table>
                     </form>
                 </div>
@@ -151,6 +138,7 @@
 <script src="https://kit.fontawesome.com/5798d03461.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
     var pathParts = window.location.pathname.split('/');
     var krsId = pathParts[pathParts.length - 2];
     var mhsId = pathParts[pathParts.length - 1];
@@ -238,12 +226,15 @@
         const formData = new FormData(event.target);
 
         formData.append('mahasiswa_id', mhsId);
-        formData.append('krs_id', krsId);
+        // Accessing the value of 'nilai' from formData
+        const nilai = formData.get('nilai');
+        if (nilai < 0 || nilai > 100) {
+            alert('Nilai harus diantara 0 - 100');
+            return;
+        }
 
         // Convert form data to JSON
         const data = Object.fromEntries(formData.entries());
-
-
 
         const url = 'https://api-group3-prognet.manpits.xyz/api/detilkrs';
 
