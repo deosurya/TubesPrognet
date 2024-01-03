@@ -61,7 +61,7 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1 id="daftar-mahasiswa">Kartu Hasil Studi</h1>
+                    <h1 id="daftar-mahasiswa">Biodata Mahasiswa</h1>
                     <ul class="breadcrumb">
                         <li>
                             <a href="">Dashboard</a>
@@ -110,6 +110,30 @@
                                 <td class="label">IPK</td>
                                 <td class="data" id="ipk"></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <div class="left">
+                <h1 id="daftar-mahasiswa">Kartu Hasil Studi</h1>
+            </div>
+            <div class="table-data">
+                <div class="data">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tahun</th>
+                                <th>Semester</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-krs">
                         </tbody>
                     </table>
                 </div>
@@ -208,10 +232,10 @@
 
                                     for (const krss of krs) {
                                         for (const matakuliahs of matakuliah) {
-                                            if ((krss.matakuliah_id == matakuliahs.id) && (krss.mahasiswa_id == mahasiswaId)) {
+                                            if ((krss.matakuliah_id == matakuliahs.id) && (krss
+                                                    .mahasiswa_id == mahasiswaId)) {
                                                 totalSks += parseInt(matakuliahs.sks);
 
-                                                console.log(krss.nilai);
 
                                                 let grade;
                                                 switch (true) {
@@ -239,7 +263,7 @@
                                                     default:
                                                         grade = 0;
                                                 }
-                                                totalNilai += grade * matakuliahs.sks;
+                                                totalNilai += grade * parseInt(matakuliahs.sks);
                                             }
                                         }
                                     }
@@ -253,5 +277,70 @@
             // Handle error
             console.error(error);
         });
-</script>
 
+
+    axios.get('https://api-group3-prognet.manpits.xyz/api/krs', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token') // Include token from localStorage
+            }
+        })
+        .then(function(response) {
+            // Handle successful response
+            var krs = response.data;
+            var tableBody = document.querySelector('#list-krs');
+
+            krs.sort(function(a, b) {
+                // Sort by tahun
+                var tahunComparison = a.tahun.localeCompare(b.tahun);
+                if (tahunComparison !== 0) {
+                    return tahunComparison;
+                }
+
+                // Sort by semester
+                var semesterA = a.semester.toLowerCase();
+                var semesterB = b.semester.toLowerCase();
+                if (semesterA === 'ganjil' && semesterB === 'genap') {
+                    return 1;
+                } else if (semesterA === 'genap' && semesterB === 'ganjil') {
+                    return -1;
+                } else {
+                    return semesterA.localeCompare(semesterB);
+                }
+            });
+
+            krs.forEach(function(krs, index) {
+                var row = document.createElement('tr');
+                var iterationCell = document.createElement('td');
+                var tahunCell = document.createElement('td');
+                var semesterCell = document.createElement('td');
+                var actionCell = document.createElement('td');
+
+                iterationCell.textContent = index + 1;
+                tahunCell.textContent = krs.tahun;
+                semesterCell.textContent = krs.semester;
+
+                // Create "Detail" button
+                var detailButton = document.createElement('button');
+                detailButton.textContent = 'Detail';
+                detailButton.className = 'btn-table-detail';
+                detailButton.addEventListener('click', function() {
+                    // Handle click event
+                    window.location.href = '/detilkhs/' + krs.id + '/' + mahasiswaId;
+                });
+
+                // Add buttons to "Aksi" cell
+                actionCell.appendChild(detailButton);
+
+                row.appendChild(iterationCell);
+                row.appendChild(tahunCell);
+                row.appendChild(semesterCell);
+                row.appendChild(actionCell);
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(function(error) {
+            // Handle error
+            console.error(error);
+        });
+</script>

@@ -63,9 +63,6 @@
             <div class="head-title">
                 <div class="left">
                     <h2>KRS</h2>
-                    <h3 id="tahun-ajaran"></h3>
-                    <h3 id="semester"></h3>
-                    <br>
                     <ul class="breadcrumb">
                         <li>
                             <a href="#">Dashboard</a>
@@ -86,6 +83,10 @@
                     <span class="text">Kembali</span>
                 </a>
             </div>
+
+            <br>
+            <p id="tahun-ajaran"></p>
+            <p id="semester"></p>
 
             <div class="table-data">
                 <div class="data">

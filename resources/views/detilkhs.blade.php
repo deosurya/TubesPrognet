@@ -54,24 +54,15 @@
     </section>
 
 
-    <!-- <div class="container">
-        <div class="sidebar">
-            <img src="..\..\resource\logo.png" alt="Logo">
-            <a href="/Dashboard">Daftar Mahasiswa</a>
-            <a href="/matakuliah">Mata Kuliah</a>
-            <a href="/krs">KRS</a>
-        </div> -->
-
     <section id="content">
         <nav>
             <i class='bx bx-menu'></i>
-            {{-- <a href="#" class="nav-link">Details</a> --}}
         </nav>
 
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h2>KRS</h2>
+                    <h2>Kartu Hasil Studi</h2>
                     <ul class="breadcrumb">
                         <li>
                             <a href="">Dashboard</a>
@@ -88,10 +79,6 @@
                     </ul>
                 </div>
                 <div class="tombol-group">
-                    <a class="btn-tambah-data" id="tambah">
-                        <i class="bx bx-plus"></i>
-                        <span class="text">Tambah Data</span>
-                    </a>
                     <a id="kembali" class="btn-tambah-data">
                         <i class="fas fa-arrow-left"></i>
                         <span class="text">Kembali</span>
@@ -104,6 +91,7 @@
             <p id="head-nim"></p>
             <p id="tahun-ajaran"></p>
             <p id="semester"></p>
+            <p id="ips"></p>
 
             <div class="table-data">
                 <div class="data">
@@ -114,7 +102,7 @@
                                 <th>Kode</th>
                                 <th>Matakuliah</th>
                                 <th>Nilai</th>
-                                <th>Aksi</th>
+                                <th>Grade</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,16 +118,14 @@
 <script src="https://kit.fontawesome.com/5798d03461.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+    var totalSks = 0;
+    var totalNilai = 0;
     var pathParts = window.location.pathname.split('/');
     var krsId = pathParts[pathParts.length - 2];
     var mhsId = pathParts[pathParts.length - 1];
 
-
     var kembali = document.getElementById('kembali');
-    kembali.href = '/detilkrs/' + krsId;
-
-    var tambah = document.getElementById('tambah');;
-    tambah.href = '/add-detilkrs/' + krsId + '/' + mhsId;
+    kembali.href = '/khs/' + mhsId;
 
     document.getElementById('logout-button').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default action
@@ -165,6 +151,7 @@
         }
     });
 
+
     axios.get('https://api-group3-prognet.manpits.xyz/api/detilkrs', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token') // Include token from localStorage
@@ -183,11 +170,39 @@
                     var kodeMatkulCell = document.createElement('td');
                     var namaMatkulCell = document.createElement('td');
                     var nilaiCell = document.createElement('td');
-                    var actionCell = document.createElement('td');
+                    var gradeCell = document.createElement('td');
+
+                    let grade;
+                    switch (true) {
+                        case (dtl.nilai >= 80 && dtl.nilai <= 100):
+                            grade = 'A';
+                            break;
+                        case (dtl.nilai >= 75 && dtl.nilai < 80):
+                            grade = 'B+';
+                            break;
+                        case (dtl.nilai >= 69 && dtl.nilai < 75):
+                            grade = 'B';
+                            break;
+                        case (dtl.nilai >= 60 && dtl.nilai < 69):
+                            grade = 'C+';
+                            break;
+                        case (dtl.nilai >= 55 && dtl.nilai < 60):
+                            grade = 'C';
+                            break;
+                        case (dtl.nilai >= 50 && dtl.nilai < 55):
+                            grade = 'D+';
+                            break;
+                        case (dtl.nilai >= 44 && dtl.nilai < 50):
+                            grade = 'D';
+                            break;
+                        default:
+                            grade = 'E';
+                    }
 
                     iterationCell.textContent = rowIndex;
                     rowIndex++;
                     nilaiCell.textContent = dtl.nilai;
+                    gradeCell.textContent = grade;
 
                     axios.get('https://api-group3-prognet.manpits.xyz/api/matakuliah/' + dtl
                             .matakuliah_id, {
@@ -203,117 +218,120 @@
                             // Set the kodeMatkul and namaMatkul values
                             kodeMatkulCell.textContent = matakuliah.kode;
                             namaMatkulCell.textContent = matakuliah.namamatakuliah;
+
+                            let poin;
+                            switch (true) {
+                                case (dtl.nilai >= 80 && dtl.nilai <= 100):
+                                    poin = 4;
+                                    break;
+                                case (dtl.nilai >= 75 && dtl.nilai < 80):
+                                    poin = 3.5;
+                                    break;
+                                case (dtl.nilai >= 69 && dtl.nilai < 75):
+                                    poin = 3;
+                                    break;
+                                case (dtl.nilai >= 60 && dtl.nilai < 69):
+                                    poin = 2.5;
+                                    break;
+                                case (dtl.nilai >= 55 && dtl.nilai < 60):
+                                    poin = 2;
+                                    break;
+                                case (dtl.nilai >= 50 && dtl.nilai < 55):
+                                    poin = 1.5;
+                                    break;
+                                case (dtl.nilai >= 44 && dtl.nilai < 50):
+                                    poin = 1;
+                                    break;
+                                default:
+                                    poin = 0;
+                            }
+                            totalSks += parseInt(matakuliah.sks);
+                            totalNilai += poin * parseInt(matakuliah.sks);
+                            console.log(totalNilai);
+                            console.log(totalSks);
                         })
                         .catch(function(error) {
                             // Handle error
                             console.error(error.response.data);
                         });
 
-                    // Create "Edit" button
-                    var editButton = document.createElement('button');
-                    editButton.textContent = 'Edit';
-                    editButton.className = 'btn-table-edit';
-                    editButton.addEventListener('click', function() {
-                        // Handle click event
-                        window.location.href = '/edit-detilkrs/' + dtl.id;
-                    });
-
-                    // Create "Delete" button
-                    var deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.className = 'btn-table-delete';
-                    deleteButton.addEventListener('click', function() {
-                        // Handle click event
-                        var confirmation = confirm('Are you sure you want to delete this data?');
-                        if (confirmation) {
-                            axios.delete('https://api-group3-prognet.manpits.xyz/api/detilkrs/' + dtl.id, {
-                                    headers: {
-                                        'Authorization': 'Bearer ' + localStorage.getItem(
-                                            'token') // Include token from localStorage
-                                    }
-                                })
-                                .then(function(response) {
-                                    // Handle successful delete
-                                    console.log(response.data);
-                                    // Refresh the page or update the table
-                                    window.location.reload();
-                                })
-                                .catch(function(error) {
-                                    // Handle delete error
-                                    console.error(error.response.data);
-                                });
-                        }
-                    });
-
-                    // Add buttons to "Aksi" cell
-                    actionCell.appendChild(editButton);
-                    actionCell.appendChild(deleteButton);
-
                     row.appendChild(iterationCell);
                     row.appendChild(kodeMatkulCell);
                     row.appendChild(namaMatkulCell);
                     row.appendChild(nilaiCell);
-                    row.appendChild(actionCell);
+                    row.appendChild(gradeCell);
 
                     tableBody.appendChild(row);
                 }
             });
         })
-        .catch(function(error) {
-            // Handle error
-            console.error(error);
-        });
-
-
-    axios.get('https://api-group3-prognet.manpits.xyz/api/mahasiswa/' + mhsId, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token') // Include token from localStorage
-            }
-        })
-        .then(function(response) {
-            // Handle successful response
-            var mahasiswa = response.data;
-
-            axios.get('https://api-group3-prognet.manpits.xyz/api/krs/' + krsId, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem(
-                            'token') // Include token from localStorage
-                    }
-                })
-                .then(function(response) {
-                    // Handle successful response
-                    var krs = response.data;
-
-                    // Display the tahun ajaran details
-                    var tahunAjaranElement = document.createElement('p');
-                    var headnamaElement = document.createElement('p');
-                    var headnimElement = document.createElement('p');
-                    var semesterElement = document.createElement('p');
-
-                    tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun;
-                    headnamaElement.textContent = 'Nama : ' + mahasiswa.nama;
-                    headnimElement.textContent = 'NIM : ' + mahasiswa.nim;
-                    semesterElement.textContent = 'Semester : ' + krs.semester;
-
-                    var HeaderElement = document.getElementById('tahun-ajaran');
-                    var HeaderElement = document.getElementById('semester');
-                    var HeaderElement = document.getElementById('head-nama');
-                    var HeaderElement = document.getElementById('head-nim');
-
-                    HeaderElement.appendChild(headnamaElement);
-                    HeaderElement.appendChild(headnimElement);
-                    HeaderElement.appendChild(tahunAjaranElement);
-                    HeaderElement.appendChild(semesterElement);
-                })
-                .catch(function(error) {
-                    // Handle error
-                    console.error(error);
-                });
+        .then(function() {
+            displayDetails();
         })
         .catch(function(error) {
             // Handle error
             console.error(error);
         });
+
+
+    // Move the block inside a function
+    function displayDetails() {
+        axios.get('https://api-group3-prognet.manpits.xyz/api/mahasiswa/' + mhsId, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token') // Include token from localStorage
+                }
+            })
+            .then(function(response) {
+                // Handle successful response
+                var mahasiswa = response.data;
+
+                axios.get('https://api-group3-prognet.manpits.xyz/api/krs/' + krsId, {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem(
+                                'token') // Include token from localStorage
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        var krs = response.data;
+
+                        ips = totalNilai / totalSks;
+
+                        // Display the tahun ajaran details
+                        var tahunAjaranElement = document.createElement('p');
+                        var headnamaElement = document.createElement('p');
+                        var headnimElement = document.createElement('p');
+                        var semesterElement = document.createElement('p');
+                        var ipsElement = document.createElement('p');
+
+                        tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun;
+                        headnamaElement.textContent = 'Nama : ' + mahasiswa.nama;
+                        headnimElement.textContent = 'NIM : ' + mahasiswa.nim;
+                        semesterElement.textContent = 'Semester : ' + krs.semester;
+                        ipsElement.textContent = 'IPS : ' + ips.toFixed(2);
+
+                        var HeaderElement = document.getElementById('tahun-ajaran');
+                        var HeaderElement = document.getElementById('semester');
+                        var HeaderElement = document.getElementById('head-nama');
+                        var HeaderElement = document.getElementById('head-nim');
+                        var HeaderElement = document.getElementById('ips');
+
+                        HeaderElement.appendChild(headnamaElement);
+                        HeaderElement.appendChild(headnimElement);
+                        HeaderElement.appendChild(tahunAjaranElement);
+                        HeaderElement.appendChild(semesterElement);
+                        HeaderElement.appendChild(ipsElement);
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
+            })
+            .catch(function(error) {
+                // Handle error
+                console.error(error);
+            });
+    }
+
 </script>
-
 </html>

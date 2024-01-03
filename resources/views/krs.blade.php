@@ -149,9 +149,9 @@
                 var semesterA = a.semester.toLowerCase();
                 var semesterB = b.semester.toLowerCase();
                 if (semesterA === 'ganjil' && semesterB === 'genap') {
-                    return -1;
-                } else if (semesterA === 'genap' && semesterB === 'ganjil') {
                     return 1;
+                } else if (semesterA === 'genap' && semesterB === 'ganjil') {
+                    return -1;
                 } else {
                     return semesterA.localeCompare(semesterB);
                 }

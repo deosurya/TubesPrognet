@@ -73,3 +73,7 @@ Route::get('/khs/{idmhs}', function () {
     return view('khs');
 })->name('khs');
 
+Route::get('/detilkhs/{idkrs}/{idmhs}', function () {
+    return view('detilkhs');
+})->name('detilkhs');
+
