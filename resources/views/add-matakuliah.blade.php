@@ -30,8 +30,8 @@
     <!-- navbar-sidebar.php -->
     <section id="sidebar">
         <a href="#" class="brand">
-        <i class='bx bxs-smile'></i>
-        <span class="text">SIMAKKU</span>
+            <i class='bx bxs-smile'></i>
+            <span class="text">SIMAKKU</span>
         </a>
         <ul class="side-menu top">
             <li>
@@ -63,10 +63,10 @@
         </ul>
     </section>
 
-        <!-- CONTENT -->
-        <section id="content">
+    <!-- CONTENT -->
+    <section id="content">
         <nav>
-            <i class='bx bx-menu' ></i>
+            <i class='bx bx-menu'></i>
             {{-- <a href="#" class="nav-link">Details</a> --}}
         </nav>
 
@@ -74,140 +74,78 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                <h1 id="mata-kuliah"> Tambah Mata Kuliah</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a href="#">Mata Kuliah</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a class="active" href="#">Tambah Mata Kuliah</a>
-                    </li>
-                </ul>
+                    <h1 id="mata-kuliah"> Tambah Mata Kuliah</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a href="#">Mata Kuliah</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Tambah Mata Kuliah</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="tombol-group">
-                <button type="submit" class="btn-tambah-data" id="tambahDataButton" form="matakuliahForm">
+                    <button type="submit" class="btn-tambah-data" id="tambahDataButton" form="matakuliahForm">
                         <i class="bx bx-plus"></i>
                         <span class="text">Tambah Data</span>
-                </button>
-                <a href="/matakuliah" class="btn-tambah-data">
-                    <i class='bx bx-arrow-back'></i>
-                    <span class="text">Kembali</span>
-                </a>
-            </div>
+                    </button>
+                    <a href="/matakuliah" class="btn-tambah-data">
+                        <i class='bx bx-arrow-back'></i>
+                        <span class="text">Kembali</span>
+                    </a>
+                </div>
             </div>
 
             <div class="table-data">
-            <div class="data">
-            <table class="table table-bordered bg-white text-dark">
-                <form id="matakuliahForm">
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Kode</label>
-                        </td>
-                        <td>
-                            <input type="text" name="kode" class="form-control" value="">
-                        </td>
-                    </tr>
+                <div class="data">
+                    <table class="table table-bordered bg-white text-dark">
+                        <form id="matakuliahForm">
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Kode</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="kode" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Mata Kuliah</label>
-                        </td>
-                        <td>
-                            <input type="text" name="namamatakuliah" class="form-control" value="">
-                        </td>
-                    </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Mata Kuliah</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="namamatakuliah" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">SKS</label>
-                        </td>
-                        <td>
-                            <input type="number" name="sks" class="form-control" value="">
-                        </td>
-                    </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">SKS</label>
+                                </td>
+                                <td>
+                                    <input type="number" name="sks" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Semester</label>
-                        </td>
-                        <td>
-                            <input type="number" name="semester" class="form-control" value="">
-                        </td>
-                    </tr>
-                </form>
-            </table>
-            </div>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Semester</label>
+                                </td>
+                                <td>
+                                    <input type="number" name="semester" class="form-control" value="">
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
         </main>
     </section>
 
-
-    <!-- <div class="container"> -->
-        <!-- <div class="sidebar">
-            <img src="resource\logo.png" alt="Logo">
-            <a href="/Dashboard">Daftar Mahasiswa</a>
-            <a href="/matakuliah">Mata Kuliah</a>
-            <a href="/krs">KRS</a>
-        </div> -->
-        <!-- <div class="content">
-            <table class="table table-bordered bg-white text-dark">
-                <form id="matakuliahForm">
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Kode</label>
-                        </td>
-                        <td>
-                            <input type="text" name="kode" class="form-control" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Mata Kuliah</label>
-                        </td>
-                        <td>
-                            <input type="text" name="namamatakuliah" class="form-control" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">SKS</label>
-                        </td>
-                        <td>
-                            <input type="number" name="sks" class="form-control" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Semester</label>
-                        </td>
-                        <td>
-                            <input type="number" name="semester" class="form-control" value="">
-                        </td>
-                    </tr>
-
-                    <div class="tombol-group">
-                        <a href="/matakuliah" class="tambah-data">
-                            <i class="fas fa-arrow-left"></i> Kembali
-                        </a>
-                        <button type="submit" class="tambah-data" id="tambahDataButton">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </button>
-                    </div>
-                </form>
-            </table>
-
-            <td></td>
-
-        </div> -->
-    <!-- </div> -->
 </body>
 
 <script src="..\resource\javascript\script.js"></script>
@@ -274,18 +212,38 @@
         // Get token from localStorage
         const token = localStorage.getItem('token');
 
-        axios.post(url, data, {
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/matakuliah";
+                const matakuliah = response.data;
+
+                for (const matkul of matakuliah) {
+                    if (matkul.kode == data.kode) {
+                        alert('Kode ' + data.kode + ' sudah ada!');
+                        return;
+                    }
+                }
+
+                axios.post(url, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/matakuliah";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });

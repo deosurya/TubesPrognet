@@ -61,7 +61,7 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Detail Data Mahasiswa</h1>
+                    <h1>Edit Data Mahasiswa</h1>
                     <ul class="breadcrumb">
                         <li>
                             <a href="#">Dashboard</a>
@@ -122,7 +122,8 @@
                                     <label class="col-form-label">Tanggal Lahir</label>
                                 </td>
                                 <td>
-                                    <input type="date" name="lahir" class="form-control" value="{{ old('lahir') ? old('lahir') : date('Y-m-d') }}">
+                                    <input type="date" name="lahir" class="form-control"
+                                        value="{{ old('lahir') ? old('lahir') : date('Y-m-d') }}">
                                 </td>
                             </tr>
 
@@ -131,7 +132,8 @@
                                     <label class="col-form-label">Agama</label>
                                 </td>
                                 <td>
-                                    <select class="form-select" id="agama" name="agama_id" aria-label="Default select example">
+                                    <select class="form-select" id="agama" name="agama_id"
+                                        aria-label="Default select example">
                                         <option selected>Pilih Agama</option>
                                     </select>
                                 </td>
@@ -154,12 +156,14 @@
             }
         })
         .then(function(response) {
+
+            editedmhs = response.data;
             // Pre-fill the form with the existing data of the mahasiswa
-            document.querySelector('input[name="nim"]').value = response.data.nim;
-            document.querySelector('input[name="nama"]').value = response.data.nama;
-            document.querySelector('input[name="alamat"]').value = response.data.alamat;
-            document.querySelector('input[name="lahir"]').value = response.data.lahir;
-            document.querySelector('select[name="agama_id"]').value = response.data.agama_id;
+            document.querySelector('input[name="nim"]').value = editedmhs.nim;
+            document.querySelector('input[name="nama"]').value = editedmhs.nama;
+            document.querySelector('input[name="alamat"]').value = editedmhs.alamat;
+            document.querySelector('input[name="lahir"]').value = editedmhs.lahir;
+            document.querySelector('select[name="agama_id"]').value = editedmhs.agama_id;
         })
         .catch(function(error) {
             // Handle error
@@ -190,20 +194,40 @@
         // Get the ID of the mahasiswa that is being edited from the URL
         var mahasiswaId = window.location.pathname.split('/').pop();
 
-        const url = 'https://api-group3-prognet.manpits.xyz/api/mahasiswa/' + mahasiswaId;
+        const url = 'https://api-group3-prognet.manpits.xyz/api/mahasiswa/';
 
-        axios.put(url, data, {
+
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/Dashboard";
+                const mahasiswa = response.data;
+
+                for (const mhs of mahasiswa) {
+                    if (mhs.nim == data.nim && data.nim != editedmhs.nim) {
+                        alert('NIM ' + data.nim + ' sudah ada!');
+                        return;
+                    }
+                }
+                axios.put(url + mahasiswaId, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/Dashboard";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });
@@ -248,7 +272,7 @@
             console.error(error);
         });
 
-        document.getElementById('logout-button').addEventListener('click', function(event) {
+    document.getElementById('logout-button').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default action
 
         // Show confirmation dialog

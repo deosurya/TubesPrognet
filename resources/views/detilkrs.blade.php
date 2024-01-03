@@ -62,7 +62,10 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h3 id="tahun-ajaran"></h3><br>
+                    <h2>KRS</h2>
+                    <h3 id="tahun-ajaran"></h3>
+                    <h3 id="semester"></h3>
+                    <br>
                     <ul class="breadcrumb">
                         <li>
                             <a href="#">Dashboard</a>
@@ -195,11 +198,14 @@
 
             // Display the tahun ajaran details
             var tahunAjaranElement = document.createElement('p');
-            tahunAjaranElement.textContent = 'KRS - Tahun ' + tahunAjaran.tahun + ' - Semester ' + tahunAjaran
-                .semester;
+            var semesterElement = document.createElement('p');
+            tahunAjaranElement.textContent = 'Tahun Ajaran : ' + tahunAjaran.tahun;
+            semesterElement.textContent = 'Semester : ' + tahunAjaran.semester;
 
             var HeaderElement = document.getElementById('tahun-ajaran');
+            var HeaderElement = document.getElementById('semester');
             HeaderElement.appendChild(tahunAjaranElement);
+            HeaderElement.appendChild(semesterElement);
         })
         .catch(function(error) {
             // Handle error

@@ -69,6 +69,7 @@ Route::get('/edit-detilkrs/{id}',  function () {
     return view('edit-detilkrs-mahasiswa');
 })->name('edit-detilkrs-mahasiswa');
 
-Route::get('/coba', function () {
-    return view('coba');
-})->name('coba');
+Route::get('/khs/{idmhs}', function () {
+    return view('khs');
+})->name('khs');
+

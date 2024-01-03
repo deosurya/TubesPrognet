@@ -18,28 +18,12 @@
 </head>
 
 <body>
-    <!-- Navbar atas -->
-    <!-- <div class="navbar">
-        <div class="logout">
-            <a id="logout-button" onclick="return confirm('Yakin untuk logout?')">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </div>
-    </div> -->
-
-    <!-- <div class="container">
-        <div class="sidebar">
-            <img src="resource\logo.png" alt="Logo">
-            <a href="/Dashboard">Daftar Mahasiswa</a>
-            <a href="/matakuliah">Mata Kuliah</a>
-            <a href="/krs">KRS</a>
-        </div> -->
 
 
     <section id="sidebar">
         <a href="#" class="brand">
-        <i class='bx bxs-smile'></i>
-        <span class="text">SIMAKKU</span>
+            <i class='bx bxs-smile'></i>
+            <span class="text">SIMAKKU</span>
         </a>
         <ul class="side-menu top">
             <li>
@@ -48,7 +32,7 @@
                     <span class="text">Daftar Mahasiswa</span>
                 </a>
             </li>
-            <li >
+            <li>
                 <a href="/matakuliah">
                     <i class='bx bxs-book-open'></i>
                     <span class="text">Mata Kuliah</span>
@@ -76,7 +60,7 @@
     <!-- CONTENT -->
     <section id="content">
         <nav>
-            <i class='bx bx-menu' ></i>
+            <i class='bx bx-menu'></i>
             {{-- <a href="#" class="nav-link">Details</a> --}}
         </nav>
 
@@ -84,21 +68,21 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                <h1 id="daftar-mahasiswa">Tambah Tahun KRS</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a href="#">KRS</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
+                    <h1 id="daftar-mahasiswa">Tambah Tahun KRS</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a href="#">KRS</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
 
-                    <li>
-                        <a class="active" href="#">Tambah Tahun</a>
-                    </li>
-                </ul>
+                        <li>
+                            <a class="active" href="#">Tambah Tahun</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="tombol-group">
                     <a href="/krs" class="btn-tambah-data">
@@ -114,84 +98,34 @@
 
             <div class="table-data">
                 <div class="data">
-                <table class="table table-bordered bg-white text-dark">
-                <form id="krsForm">
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Tahun</label>
-                        </td>
-                        <td>
-                            <input type="number" name="tahun" class="form-control" value="">
-                        </td>
-                    </tr>
+                    <table class="table table-bordered bg-white text-dark">
+                        <form id="krsForm">
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Tahun</label>
+                                </td>
+                                <td>
+                                    <input type="number" name="tahun" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Semester</label>
-                        </td>
-                        <td>
-                            <select name="semester" class="form-control">
-                                <option value="Ganjil">Ganjil</option>
-                                <option value="Genap">Genap</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <!-- <div class="tombol-group">
-                        <a href="/krs" class="tambah-data">
-                            <i class="fas fa-arrow-left"></i> Kembali
-                        </a>
-                        <button type="submit" class="button-style" id="tambahDataButton">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </button>
-                    </div> -->
-                </form>
-            </table>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Semester</label>
+                                </td>
+                                <td>
+                                    <select name="semester" class="form-control">
+                                        <option value="Ganjil">Ganjil</option>
+                                        <option value="Genap">Genap</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
         </main>
-
     </section>
 </body>
 
-        <!-- <div class="content"> -->
-            <!-- <table class="table table-bordered bg-white text-dark">
-                <form id="krsForm">
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Tahun</label>
-                        </td>
-                        <td>
-                            <input type="number" name="tahun" class="form-control" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">
-                            <label class="col-form-label">Semester</label>
-                        </td>
-                        <td>
-                            <select name="semester" class="form-control">
-                                <option value="Ganjil">Ganjil</option>
-                                <option value="Genap">Genap</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <div class="tombol-group">
-                        <a href="/krs" class="tambah-data">
-                            <i class="fas fa-arrow-left"></i> Kembali
-                        </a>
-                        <button type="submit" class="button-style" id="tambahDataButton">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </button>
-                    </div>
-                </form>
-            </table> -->
-<!--
-            <td></td>
-
-        </div>
-    </div>
-</body> -->
 
 <script src="..\resource\javascript\script.js"></script>
 <script src="https://kit.fontawesome.com/5798d03461.js" crossorigin="anonymous"></script>
@@ -243,23 +177,44 @@
         }
 
 
+
         const url = 'https://api-group3-prognet.manpits.xyz/api/krs';
 
         // Get token from localStorage
         const token = localStorage.getItem('token');
 
-        axios.post(url, data, {
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/krs";
+                const krs = response.data;
+
+                for (const krss of krs) {
+                    if ((krss.tahun == data.tahun) && (krss.semester == data.semester)) {
+                        alert('Tahun ajaran ' + data.tahun + ' ' + data.semester + ' sudah ada!');
+                        return;
+                    }
+
+                }
+                axios.post(url, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/krs";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });

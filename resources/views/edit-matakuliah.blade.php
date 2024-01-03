@@ -151,11 +151,12 @@
             }
         })
         .then(function(response) {
+            editedmatkul = response.data;
             // Pre-fill the form with the existing data of the mahasiswa
-            document.querySelector('input[name="kode"]').value = response.data.kode;
-            document.querySelector('input[name="namamatakuliah"]').value = response.data.namamatakuliah;
-            document.querySelector('input[name="semester"]').value = response.data.semester;
-            document.querySelector('input[name="sks"]').value = response.data.sks;
+            document.querySelector('input[name="kode"]').value = editedmatkul.kode;
+            document.querySelector('input[name="namamatakuliah"]').value = editedmatkul.namamatakuliah;
+            document.querySelector('input[name="semester"]').value = editedmatkul.semester;
+            document.querySelector('input[name="sks"]').value = editedmatkul.sks;
         })
         .catch(function(error) {
             // Handle error
@@ -182,20 +183,40 @@
         // Get the ID of the mahasiswa that is being edited from the URL
         var matkulId = window.location.pathname.split('/').pop();
 
-        const url = 'https://api-group3-prognet.manpits.xyz/api/matakuliah/' + matkulId;
+        const url = 'https://api-group3-prognet.manpits.xyz/api/matakuliah/';
 
-        axios.put(url, data, {
+
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/matakuliah";
+                const matakuliah = response.data;
+
+                for (const matkul of matakuliah) {
+                    if (matkul.kode == data.kode && data.kode != editedmatkul.kode) {
+                        alert('Kode ' + data.kode + ' sudah ada!');
+                        return;
+                    }
+                }
+                axios.put(url + matkulId, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/matakuliah";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });

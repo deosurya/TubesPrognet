@@ -30,8 +30,8 @@
     <!-- navbar-sidebar.php -->
     <section id="sidebar">
         <a href="#" class="brand">
-        <i class='bx bxs-smile'></i>
-        <span class="text">SIMAKKU</span>
+            <i class='bx bxs-smile'></i>
+            <span class="text">SIMAKKU</span>
         </a>
         <ul class="side-menu top">
             <li class="active">
@@ -66,99 +66,99 @@
     <!-- CONTENT -->
     <section id="content">
         <nav>
-            <i class='bx bx-menu' ></i>
+            <i class='bx bx-menu'></i>
             {{-- <a href="#" class="nav-link">Details</a> --}}
         </nav>
         <!-- MAIN -->
         <main>
-        <div class="head-title">
-            <div class="left">
-            <h1>Tambah Data Mahasiswa</h1>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li><i class='bx bx-chevron-right'></i></li>
-                <li>
-                    <a href="#">Daftar Mahasiswa</a>
-                </li>
-                <li><i class='bx bx-chevron-right'></i></li>
-                <li>
-                    <a class="active" href="./add-mahasiswa.php">Tambah Data</a>
-                </li>
-            </ul>
-            </div>
-            <div class="tombol-group">
-                <!-- <a href="./mahasiswa.php" class="btn-tambah-data">
+            <div class="head-title">
+                <div class="left">
+                    <h1>Tambah Data Mahasiswa</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a href="#">Daftar Mahasiswa</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="./add-mahasiswa.php">Tambah Data</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tombol-group">
+                    <!-- <a href="./mahasiswa.php" class="btn-tambah-data">
                     <i class='bx bx-plus'></i>
                     <span class="text">Tambah Data</span>
                 </a> -->
-                <button type="submit" class="btn-tambah-data" id="tambahDataButton" form="mahasiswaForm">
-                    <i class="bx bx-plus"></i>
-                    <span class="text">Tambah Data</span>
-                </button>
-                <a href="/Dashboard" class="btn-tambah-data">
-                    <i class='bx bx-arrow-back'></i>
-                    <span class="text">Kembali</span>
-                </a>
+                    <button type="submit" class="btn-tambah-data" id="tambahDataButton" form="mahasiswaForm">
+                        <i class="bx bx-plus"></i>
+                        <span class="text">Tambah Data</span>
+                    </button>
+                    <a href="/Dashboard" class="btn-tambah-data">
+                        <i class='bx bx-arrow-back'></i>
+                        <span class="text">Kembali</span>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="table-data">
-            <div class="data">
-                <form id="mahasiswaForm">
-                    <table class="table table-bordered bg-white text-dark">
-                        <tr>
-                            <td class="text-center">
-                                <label class="col-form-label">NIM</label>
-                            </td>
-                            <td>
-                                <input type="text" name="nim" class="form-control" value="">
-                            </td>
-                        </tr>
+            <div class="table-data">
+                <div class="data">
+                    <form id="mahasiswaForm">
+                        <table class="table table-bordered bg-white text-dark">
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">NIM</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="nim" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td class="text-center">
-                                <label class="col-form-label">Nama</label>
-                            </td>
-                            <td>
-                                <input type="text" name="nama" class="form-control" value="">
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Nama</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="nama" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td class="text-center">
-                                <label class="col-form-label">Alamat</label>
-                            </td>
-                            <td>
-                                <input type="text" name="alamat" class="form-control" value="">
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Alamat</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="alamat" class="form-control" value="">
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td class="text-center">
-                                <label class="col-form-label">Tanggal Lahir</label>
-                            </td>
-                            <td>
-                                <input type="date" name="lahir" class="form-control"
-                                    value="{{ old('lahir') ? old('lahir') : date('Y-m-d') }}">
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Tanggal Lahir</label>
+                                </td>
+                                <td>
+                                    <input type="date" name="lahir" class="form-control"
+                                        value="{{ old('lahir') ? old('lahir') : date('Y-m-d') }}">
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td class="text-center">
-                                <label class="col-form-label">Agama</label>
-                            </td>
-                            <td>
-                                <select class="form-select" id="agama" name="agama_id"
-                                    aria-label="Default select example">
-                                    <option selected>Pilih Agama</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                            <tr>
+                                <td class="text-center">
+                                    <label class="col-form-label">Agama</label>
+                                </td>
+                                <td>
+                                    <select class="form-select" id="agama" name="agama_id"
+                                        aria-label="Default select example">
+                                        <option selected>Pilih Agama</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </div>
-        </div>
         </main>
     </section>
 </body>
@@ -239,18 +239,38 @@
         // Get token from localStorage
         const token = localStorage.getItem('token');
 
-        axios.post(url, data, {
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/Dashboard";
+                const mahasiswa = response.data;
+
+                for (const mhs of mahasiswa) {
+                    if (mhs.nim == data.nim) {
+                        alert('NIM ' + data.nim + ' sudah ada!');
+                        return;
+                    }
+                }
+
+                axios.post(url, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/Dashboard";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });

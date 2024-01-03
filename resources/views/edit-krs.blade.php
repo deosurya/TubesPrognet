@@ -131,6 +131,8 @@
             }
         })
         .then(function(response) {
+
+            editedkrs = response.data;
             // Pre-fill the form with the existing data of the mahasiswa
             document.querySelector('input[name="tahun"]').value = response.data.tahun;
 
@@ -168,20 +170,39 @@
         // Get the ID of the mahasiswa that is being edited from the URL
         var krsId = window.location.pathname.split('/').pop();
 
-        const url = 'https://api-group3-prognet.manpits.xyz/api/krs/' + krsId;
+        const url = 'https://api-group3-prognet.manpits.xyz/api/krs/';
 
-        axios.put(url, data, {
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/krs";
+                const krs = response.data;
+
+                for (const krss of krs) {
+                    if ((krss.tahun == data.tahun) && (krss.semester == data.semester) && (data.tahun != editedkrs.tahun) && (data.semester != editedkrs.semester)) {
+                        alert('Tahun ajaran ' + data.tahun + ' ' + data.semester + ' sudah ada!');
+                        return;
+                    }
+                }
+                axios.put(url + krsId, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/krs";
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });

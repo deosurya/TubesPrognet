@@ -71,7 +71,12 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h3 id="tahun-ajaran"></h3><br>
+                    <h2>KRS</h2>
+                    <h3 id="head-nama"></h3>
+                    <h3 id="head-nim"></h3>
+                    <h3 id="tahun-ajaran"></h3>
+                    <h3 id="semester"></h3>
+                    <br>
                     <ul class="breadcrumb">
                         <li>
                             <a href="">Dashboard</a>
@@ -306,12 +311,24 @@
 
                     // Display the tahun ajaran details
                     var tahunAjaranElement = document.createElement('p');
-                    tahunAjaranElement.textContent = mahasiswa.nama + ' - ' + krs.tahun + ' - Semester ' +
-                        krs
-                        .semester;
+                    var headnamaElement = document.createElement('p');
+                    var headnimElement = document.createElement('p');
+                    var semesterElement = document.createElement('p');
+
+                    tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun;
+                    headnamaElement.textContent = 'Nama : ' + mahasiswa.nama;
+                    headnimElement.textContent = 'NIM : ' + mahasiswa.nim;
+                    semesterElement.textContent = 'Semester : ' + krs.semester;
 
                     var HeaderElement = document.getElementById('tahun-ajaran');
+                    var HeaderElement = document.getElementById('semester');
+                    var HeaderElement = document.getElementById('head-nama');
+                    var HeaderElement = document.getElementById('head-nim');
+
+                    HeaderElement.appendChild(headnamaElement);
+                    HeaderElement.appendChild(headnimElement);
                     HeaderElement.appendChild(tahunAjaranElement);
+                    HeaderElement.appendChild(semesterElement);
                 })
                 .catch(function(error) {
                     // Handle error

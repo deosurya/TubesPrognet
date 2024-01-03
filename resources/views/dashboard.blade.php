@@ -154,10 +154,19 @@
                 namaCell.textContent = mhs.nama;
                 nimCell.textContent = mhs.nim;
 
+                // Create "Detail" button
+                var detailButton = document.createElement('button');
+                detailButton.textContent = 'Detail';
+                detailButton.className = 'btn-table-detail';
+                detailButton.addEventListener('click', function() {
+                    // Handle click event
+                    window.location.href = '/khs/' + mhs.id;
+                });
+
                 // Create "Edit" button
                 var editButton = document.createElement('button');
-                editButton.textContent = 'Detail';
-                editButton.className = 'btn-table-detail';
+                editButton.textContent = 'Edit';
+                editButton.className = 'btn-table-edit';
                 editButton.addEventListener('click', function() {
                     // Handle click event
                     window.location.href = '/edit-mahasiswa/' + mhs.id;
@@ -189,6 +198,7 @@
                     }
                 });
                 // Add buttons to "Aksi" cell
+                actionCell.appendChild(detailButton);
                 actionCell.appendChild(editButton);
                 actionCell.appendChild(deleteButton);
 

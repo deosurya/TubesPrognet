@@ -273,21 +273,44 @@
             formData.append('mahasiswa_id', mhsId);
             formData.append('krs_id', krsId);
             const data = Object.fromEntries(formData.entries());
-            const url = 'https://api-group3-prognet.manpits.xyz/api/detilkrs/' + detilkrsId;
+            const url = 'https://api-group3-prognet.manpits.xyz/api/detilkrs/';
             const token = localStorage.getItem('token');
 
-            try {
-                const response = await axios.put(url, data, {
+            axios.get(url, {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
-                });
+                })
+                .then(function(response) {
+                    // Handle successful response
+                    const detilkrs = response.data;
 
-                console.log(response);
-                window.location.href = "/detilkrs/" + krsId + "/" + mhsId;
-            } catch (error) {
+                    for (const dkrs of detilkrs) {
+                        if (dkrs.mahasiswa_id == data.mahasiswa_id) {
+                            if (dkrs.matakuliah_id == data.matakuliah_id && data.matakuliah_id != matkulId) {
+                                alert('Mata kuliah tersebut sudah diambil!');
+                                return;
+                            }
+                        }
+                    }
+                    axios.put(url + detilkrsId, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/detilkrs/" + krsId + "/" + mhsId;
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
+            })
+            .catch(function(error) {
                 console.error(error);
-            }
+            });
         });
 
         try {

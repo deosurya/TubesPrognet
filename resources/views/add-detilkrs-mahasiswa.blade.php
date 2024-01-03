@@ -138,7 +138,6 @@
 <script src="https://kit.fontawesome.com/5798d03461.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-
     var pathParts = window.location.pathname.split('/');
     var krsId = pathParts[pathParts.length - 2];
     var mhsId = pathParts[pathParts.length - 1];
@@ -242,18 +241,39 @@
         // Get token from localStorage
         const token = localStorage.getItem('token');
 
-        axios.post(url, data, {
+        axios.get(url, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
             .then(function(response) {
                 // Handle successful response
-                console.log(response);
-                window.location.href = "/detilkrs/" + krsId + "/" + mhsId;
+                const detilkrs = response.data;
+
+                for (const dkrs of detilkrs) {
+                    if (dkrs.mahasiswa_id == data.mahasiswa_id) {
+                        if (dkrs.matakuliah_id == data.matakuliah_id) {
+                            alert('Mata kuliah tersebut sudah diambil!');
+                            return;
+                        }
+                    }
+                }
+                axios.post(url, data, {
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(function(response) {
+                        // Handle successful response
+                        console.log(response);
+                        window.location.href = "/detilkrs/" + krsId + "/" + mhsId;
+                    })
+                    .catch(function(error) {
+                        // Handle error
+                        console.error(error);
+                    });
             })
             .catch(function(error) {
-                // Handle error
                 console.error(error);
             });
     });
