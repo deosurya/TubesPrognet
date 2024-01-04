@@ -24,7 +24,7 @@
             <span class="text">SIMAKKU</span>
         </a>
         <ul class="side-menu top">
-            <li>
+            <li class="active">
                 <a href="/Dashboard">
                     <i class='bx bxs-group'></i>
                     <span class="text">Daftar Mahasiswa</span>
@@ -36,7 +36,7 @@
                     <span class="text">Mata Kuliah</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/krs">
                     <i class='bx bx-sitemap'></i>
                     <span class="text">KRS</span>
