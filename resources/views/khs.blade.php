@@ -72,7 +72,7 @@
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li>
-                            <a class="active" href="">KHS</a>
+                            <a class="active" href="">Biodata Mahasiswa</a>
                         </li>
                     </ul>
                 </div>
@@ -128,7 +128,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tahun</th>
+                                <th>Tahun Ajaran</th>
                                 <th>Semester</th>
                                 <th>Aksi</th>
                             </tr>
@@ -316,7 +316,13 @@
                 var actionCell = document.createElement('td');
 
                 iterationCell.textContent = index + 1;
-                tahunCell.textContent = krs.tahun;
+
+                if (krs.semester.toLowerCase() == 'ganjil') {
+                    tahunCell.textContent = krs.tahun + ' / ' + (parseInt(krs.tahun) + 1);
+                } else {
+                    tahunCell.textContent = (parseInt(krs.tahun) - 1) + ' / ' + krs.tahun;
+                }
+
                 semesterCell.textContent = krs.semester;
 
                 // Create "Detail" button

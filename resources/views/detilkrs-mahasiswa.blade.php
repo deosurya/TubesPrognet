@@ -226,12 +226,13 @@
                         // Handle click event
                         var confirmation = confirm('Are you sure you want to delete this data?');
                         if (confirmation) {
-                            axios.delete('https://api-group3-prognet.manpits.xyz/api/detilkrs/' + dtl.id, {
-                                    headers: {
-                                        'Authorization': 'Bearer ' + localStorage.getItem(
-                                            'token') // Include token from localStorage
-                                    }
-                                })
+                            axios.delete('https://api-group3-prognet.manpits.xyz/api/detilkrs/' +
+                                    dtl.id, {
+                                        headers: {
+                                            'Authorization': 'Bearer ' + localStorage.getItem(
+                                                'token') // Include token from localStorage
+                                        }
+                                    })
                                 .then(function(response) {
                                     // Handle successful delete
                                     console.log(response.data);
@@ -290,7 +291,14 @@
                     var headnimElement = document.createElement('p');
                     var semesterElement = document.createElement('p');
 
-                    tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun;
+                    if (krs.semester.toLowerCase() == 'ganjil') {
+                        tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun + ' / ' + (
+                            parseInt(krs.tahun) + 1);
+                    } else {
+                        tahunAjaranElement.textContent = 'Tahun Ajaran : ' + (parseInt(krs.tahun) -
+                            1) + ' / ' + krs.tahun;
+                    }
+
                     headnamaElement.textContent = 'Nama : ' + mahasiswa.nama;
                     headnimElement.textContent = 'NIM : ' + mahasiswa.nim;
                     semesterElement.textContent = 'Semester : ' + krs.semester;

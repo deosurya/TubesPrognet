@@ -195,13 +195,21 @@
         })
         .then(function(response) {
             // Handle successful response
-            var tahunAjaran = response.data;
+            var krs = response.data;
 
             // Display the tahun ajaran details
             var tahunAjaranElement = document.createElement('p');
             var semesterElement = document.createElement('p');
-            tahunAjaranElement.textContent = 'Tahun Ajaran : ' + tahunAjaran.tahun;
-            semesterElement.textContent = 'Semester : ' + tahunAjaran.semester;
+
+            if (krs.semester.toLowerCase() == 'ganjil') {
+                tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun + ' / ' + (
+                    parseInt(krs.tahun) + 1);
+            } else {
+                tahunAjaranElement.textContent = 'Tahun Ajaran : ' + (parseInt(krs.tahun) -
+                    1) + ' / ' + krs.tahun;
+            }
+
+            semesterElement.textContent = 'Semester : ' + krs.semester;
 
             var HeaderElement = document.getElementById('tahun-ajaran');
             var HeaderElement = document.getElementById('semester');

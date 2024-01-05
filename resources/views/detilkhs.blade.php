@@ -69,12 +69,15 @@
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li>
-                            <a href="">KRS</a>
+                            <a href="">Daftar Mahasiswa</a>
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
-
                         <li>
-                            <a class="active" href="#">Detail</a>
+                            <a href="">Biodata Mahasiswa</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="">KHS</a>
                         </li>
                     </ul>
                 </div>
@@ -304,7 +307,14 @@
                         var semesterElement = document.createElement('p');
                         var ipsElement = document.createElement('p');
 
-                        tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun;
+                        if (krs.semester.toLowerCase() == 'ganjil') {
+                            tahunAjaranElement.textContent = 'Tahun Ajaran : ' + krs.tahun + ' / ' + (
+                                parseInt(krs.tahun) + 1);
+                        } else {
+                            tahunAjaranElement.textContent = 'Tahun Ajaran : ' + (parseInt(krs.tahun) -
+                                1) + ' / ' + krs.tahun;
+                        }
+
                         headnamaElement.textContent = 'Nama : ' + mahasiswa.nama;
                         headnimElement.textContent = 'NIM : ' + mahasiswa.nim;
                         semesterElement.textContent = 'Semester : ' + krs.semester;
@@ -332,6 +342,6 @@
                 console.error(error);
             });
     }
-
 </script>
+
 </html>

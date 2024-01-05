@@ -84,7 +84,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tahun</th>
+                                <th>Tahun Ajaran</th>
                                 <th>Semester</th>
                                 <th>Aksi</th>
                             </tr>
@@ -165,7 +165,13 @@
                 var actionCell = document.createElement('td');
 
                 iterationCell.textContent = index + 1;
-                tahunCell.textContent = krs.tahun;
+
+                if (krs.semester.toLowerCase() == 'ganjil') {
+                    tahunCell.textContent = krs.tahun + ' / ' + (parseInt(krs.tahun) + 1);
+                } else {
+                    tahunCell.textContent = (parseInt(krs.tahun) - 1) + ' / ' + krs.tahun;
+                }
+
                 semesterCell.textContent = krs.semester;
 
                 // Create "Edit" button
